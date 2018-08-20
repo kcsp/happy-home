@@ -10,6 +10,9 @@
 	</style>
 </head>
 <body>
-	<h1>Welcome to Hapapy-Home</h1>
+	<h1>Welcome to Houses Page </h1>
+	<% @houses.each do |houses| %>
+	<h1><%= houses.name.capitalize %></h1>
+	<% end %>
 </body>
 </html>

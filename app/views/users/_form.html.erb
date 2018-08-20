@@ -1,0 +1,17 @@
+<%= render 'errors' %>
+<%= form_for @user do |user| %>
+	<p>
+		<%= user.label :name %> : <%= user.text_field :name %>
+	</p>
+	<p>
+		<%= user.label :mail %>	: <%= user.email_field :mail %>		
+	<p>
+		<%= user.label :contact %> : <%= user.telephone_field :contact %>
+	</p>
+	<p>
+		<%= user.label :user_type %> : <%= user.text_field :user_type %>
+	</p>
+	<p>
+		<%= user.submit %>
+	</p>
+<% end %>

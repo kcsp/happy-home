@@ -1,0 +1,27 @@
+<%= render 'errors' %>
+<%= form_for @house do |house| %>
+	<p>
+		<%= house.label :name %> : <%= house.text_field :name %>
+	</p>
+	<p>
+		<%= house.label :address %> : <%= house.text_area :address %>
+	</p>
+	<p>
+		<%= house.label :property_for %> : <%= house.select :property_for, ['Rent', 'Sell'] %>
+	</p>
+	<p>
+		<%= house.label :furniture %> : <%= house.select :furniture, ['Fully-furnished', 'Semi-furnished', 'Not-furnished'] %>
+	</p>
+	<p>
+		<%= house.label :amount %> : <%= house.text_field :amount %>
+	</p>
+	<p>
+		<%= house.label :age_of_property %> : <%= house.number_field :age_of_property,in: 0.0..50.0, step: 1.0 %>
+	</p>
+	<p>
+		<%= house.label :owner %> : <%= house.collection_select :user_id, User.order(:name),:id,:name, include_blank: true %>
+	</p>
+	<p>
+		<%= house.submit %>
+	</p>
+<% end %>
