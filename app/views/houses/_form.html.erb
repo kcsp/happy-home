@@ -13,6 +13,9 @@
 		<%= house.label :furniture %> : <%= house.select :furniture, ['Fully-furnished', 'Semi-furnished', 'Not-furnished'] %>
 	</p>
 	<p>
+		<%= house.label :bhk %> : <%= house.select :bhk, ['1BHK', '2BHK', '3BHK', '4BHK'] %>
+	</p>
+	<p>
 		<%= house.label :amount %> : <%= house.text_field :amount %>
 	</p>
 	<p>

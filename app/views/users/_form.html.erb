@@ -9,7 +9,7 @@
 		<%= user.label :contact %> : <%= user.telephone_field :contact %>
 	</p>
 	<p>
-		<%= user.label :user_type %> : <%= user.text_field :user_type %>
+		<%= user.label :user_type %> : <%= user.select :user_type, ['Admin', 'Land lord', 'Tenant'] %>
 	</p>
 	<p>
 		<%= user.submit %>
