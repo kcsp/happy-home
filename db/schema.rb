@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2018_08_14_081416) do
     t.text "address"
     t.string "property_for"
     t.string "furniture"
+    t.string "bhk"
     t.bigint "amount"
     t.integer "age_of_property"
     t.integer "user_id"
@@ -37,7 +38,7 @@ ActiveRecord::Schema.define(version: 2018_08_14_081416) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "mail"
-    t.integer "contact"
+    t.bigint "contact"
     t.string "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

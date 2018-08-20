@@ -3,7 +3,7 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
     create_table :users do |t|
     	t.string :name
     	t.string :mail
-    	t.integer :contact
+    	t.bigint :contact
     	t.string :user_type
     	t.timestamps
     end
@@ -13,6 +13,7 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
     	t.text :address
     	t.string :property_for
     	t.string :furniture
+        t.string :bhk
     	t.bigint :amount
     	t.integer :age_of_property
     	t.belongs_to :user, index: true
