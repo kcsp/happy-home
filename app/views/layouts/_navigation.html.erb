@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Happy-Home", root_path, class: "navbar-brand", id: "logo" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "About us", about_path, id: "form_font" %></li>
+        <li><%= link_to "Listed Houses", houses_path, id: "form_font" %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"  id="form_font" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">want a House? <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Rent a house", houses_path, id:"form_font" %></li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to "Buy a house", houses_path, id:"form_font" %></li>
+          </ul>
+        </li>
+        <li><%= link_to "want to list a House?", new_house_path, id:"form_font" %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "History", user_path([:id]), id:"form_font" %></li>
+        <li><a id="form_font" href="#">Sign in/ Sign up </a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" id="form_font" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello <div class="glyphicon glyphicon-user"></div><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Profile", user_path([:id]), id:"form_font" %></a></li>
+            <li role="separator" class="divider"></li>
+            <li id="form_font"><a href="#">Sign Out</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <input type="text" class="form-control" style="width: 300px" placeholder="Enter house name, or BHK or location">
+        </div>        <button type="submit" class="btn btn-default" style="letter-spacing: -1px;color: #000000">Search</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

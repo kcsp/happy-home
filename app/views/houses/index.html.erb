@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>About Us</title>
-	<style type="text/css">
-		body {
-			background-image: url(/assets/background.png);
-			background-size: cover;
-		}
-	</style>
-</head>
-<body>
-	<h1>Welcome to Houses Page </h1>
-	<% @houses.each do |houses| %>
-	<h1><%= houses.name.capitalize %></h1>
-	<% end %>
-</body>
-</html>
+<h1>Welcome to Houses Page </h1>
+<% @houses.each do |houses| %>
+<h1><%= houses.name.capitalize %></h1>
+<% end %>
