@@ -1,4 +1,26 @@
-<h1>Welcome to User Page</h1>
+<h1>User's of Happy-Home</h1>
 <% @users.each do |user|%>
-<h1><%= user.name %></h1>
+<%= form_for user do |u| %>
+<div class="row">
+	<div class="col-xs-8 col-xs-offset-2">
+		<div class="well well-lg">
+			<h3 class="description"><%= user.name %> account details : </h3>
+			<%= u.label "Name" %> : <%= link_to user.name.capitalize, user_path(user) %>
+			<br/>
+			<%= u.label "Mail-Id" %> : <%= user.mail %>
+			<br/>
+			<%= u.label "Contact" %> : <%= user.contact %>
+			<br/>
+			<%= u.label "User type" %> : <%= user.user_type.capitalize %>
+			<div class="actions">
+				<%= link_to "Update account details", edit_user_path(user), class: "btn btn-xs btn-primary" %>
+	    		<%= link_to "Delete account", user_path(user), method: :delete,
+	    			                                            data: {confirm: "are you sure you want to delete #{user.name} account permanently?"},
+	        	                                                class: "btn btn-xs btn-danger" %>
+	   			<%= link_to "Back to users page", users_path, class: "btn btn-xs btn-default" %>
+	  		</div>
+	  	</div>
+	  </div>
+	</div>
+<% end %>
 <% end %>

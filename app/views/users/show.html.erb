@@ -1,2 +1,20 @@
-<h1>Welcome to User Page</h1>
-	<h1><%= @user.name %></h1>
+<h1 class="center"> <%= @user.name %>'s profile </h1>
+<div class="well col-xs-8 col-xs-offset-2">
+	<%= form_for @user do |user| %>
+	<h3 class="description"><%= @user.name %> account details : </h3>
+	<%= user.label "Name" %> : <%= @user.name.capitalize %>
+	<br/>
+	<%= user.label "Mail-Id" %> : <%= @user.mail %>
+	<br/>
+	<%= user.label "Contact" %> : <%= @user.contact %>
+	<br/>
+	<%= user.label "User type" %> : <%= @user.user_type.capitalize %>
+	<div class="actions">
+		<%= link_to "Update account details", edit_user_path(@user), class: "btn btn-xs btn-primary" %>
+	    <%= link_to "Delete account", user_path(@user), method: :delete, 
+	                                                      data: {confirm: "are you sure you want to delete #{@user.name} account permanently?"},
+	                                                      class: "btn btn-xs btn-danger" %>
+	    <%= link_to "Back to users page", users_path, class: "btn btn-xs btn-default" %>
+	</div>
+	<% end %>
+</div>

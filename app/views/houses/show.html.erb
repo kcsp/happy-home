@@ -1,4 +1,25 @@
-<h1> Welcome to Happy-home </h1>
-<h3> <%= @house.name  %> deatils</h3>
-<p> Name : <%= @house.name %></p>
-<p> Address : <%= @house.address %></p>
+<h1 class="center"> Welcome to <%= @house.name  %> </h1>
+<div class="well col-xs-8 col-xs-offset-2">
+	<%= form_for @house do |house| %>
+	<h3 class="description"><%= @house.name %> details : </h3>
+	<%= house.label "House name" %> : <%= @house.name.capitalize %>
+	<br/>
+	<%= house.label "Address" %> : <%= simple_format(@house.address) %>
+	<%= house.label "House for" %> : <%= @house.property_for.capitalize %>
+	<br/>
+	<%= house.label "Furniture type" %> : <%= @house.furniture.capitalize %>
+	<br/>
+	<%= house.label "Number of bedrooms" %> : <%= @house.bhk.upcase %>
+	<br/>
+	<%= house.label "Amount" %> : <%= @house.amount %>
+	<br/>
+	<%= house.label "Age of building" %> : <%= @house.age_of_property %> years
+	<br/>
+	<%= house.label "Owner" %> : <%= @house.user.name.capitalize %>
+	<div class="actions">
+		<%= link_to "Edit House details", edit_house_path(@house), class: "btn btn-xs btn-primary" %>
+	    <%= link_to "Delete House", house_path(@house), method: :delete, data: {confirm: "are you sure you want to delete #{@house.name} house?"}, class: "btn btn-xs btn-danger" %>
+	    <%= link_to "Back to listed houses", houses_path, class: "btn btn-xs btn-default" %>
+	</div>
+	<% end %>
+</div>
