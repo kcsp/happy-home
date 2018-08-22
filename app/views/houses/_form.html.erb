@@ -1,30 +1,56 @@
 <%= render 'errors' %>
-<%= form_for @house do |house| %>
-	<p>
-		<%= house.label :name %> : <%= house.text_field :name %>
-	</p>
-	<p>
-		<%= house.label :address %> : <%= house.text_area :address %>
-	</p>
-	<p>
-		<%= house.label :property_for %> : <%= house.select :property_for, ['Rent', 'Sell'] %>
-	</p>
-	<p>
-		<%= house.label :furniture %> : <%= house.select :furniture, ['Fully-furnished', 'Semi-furnished', 'Not-furnished'] %>
-	</p>
-	<p>
-		<%= house.label :bhk %> : <%= house.select :bhk, ['1BHK', '2BHK', '3BHK', '4BHK'] %>
-	</p>
-	<p>
-		<%= house.label :amount %> : <%= house.text_field :amount %>
-	</p>
-	<p>
-		<%= house.label :age_of_property %> : <%= house.number_field :age_of_property,in: 0.0..50.0, step: 1.0 %>
-	</p>
-	<p>
-		<%= house.label :owner %> : <%= house.collection_select :user_id, User.order(:name),:id,:name, include_blank: true %>
-	</p>
-	<p>
-		<%= house.submit %>
-	</p>
-<% end %>
+<div class="row">
+	<div class="col-xs-12">
+		<%= form_for @house do |house| %>
+		<div class="col-sm-4">
+		</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<%= house.text_field :name, class: "form-control", placeholder: "Enter your house name", autofocus: true %>
+				</div>
+				<div class="form-group">
+					<%= house.text_area :address , rows: 3, class: "form-control", placeholder: "Enter your house address" %>
+				</div>
+				<div class="form-group">
+		            <div class="control-label">
+		            	<%= house.label :property_for %> <%= ":" %> <%= house.select :property_for, ['Rent', 'Sell'], class: "form-control" %>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <div class="control-label">
+		            	<%= house.label :furniture %> <%= ":" %> <%= house.select :furniture, ['Fully-furnished', 'Semi-furnished', 'Not-furnished'], class: "form-control" %>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <div class="control-label">
+		            	<%= house.label :bhk %> <%= ":" %> <%= house.select :bhk, ['1BHK', '2BHK', '3BHK', '4BHK'], class: "form-control" %>
+		            </div>
+		        </div>
+		        <div class="form-group">
+		            <div class="control-label">
+		            	 <%= house.label "Owner" %> <%= ":" %> <%= house.collection_select :user_id, User.order(:name),:id,:name, include_blank: true, class: "form-control" %>
+		            </div>
+		        </div>
+		         <div class="form-group">
+		        	<%= house.text_field :amount, class: "form-control", placeholder: "Enter amount for this property" %>
+		        </div>
+		        <div class="form-group">
+		        	<%= house.number_field :age_of_property,in: 0.0..50.0, step: 1.0, class: "form-control", placeholder: "Age of this property" %>
+		        </div>
+		        <div class="form-group">
+		        	<p> <input type="checkbox" required> Agree to terms and conditions </p>
+		        </div>
+		    </div>
+		    <div class="col-sm-4">
+		    </div>
+		     <div class="form-group">
+		    	<div class="col-sm-offset-5 col-sm-1">
+		    		<%= house.submit "List house",class: "btn btn-primary" %>
+		    	</div>
+		    	<div class="col-sm-1">
+		   			<%= link_to "Cancel", root_path, class: "btn btn-warning" %>
+	            </div>
+		    </div>
+		<% end %>
+	</div>
+</div>
