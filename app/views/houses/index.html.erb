@@ -1,32 +1,8 @@
 <h1 class="center">Listed Houses</h1>
-<% @houses.each do |house| %>
-<%= form_for house do |h| %>
-<div class="row">
-	<div class="col-xs-8 col-xs-offset-2">
-		<div class="well well-lg">
-			<h3 class="description"><%= house.name %> details : </h3>
-			<%= h.label "House name" %> : <%= link_to house.name.capitalize, house_path(house) %>
-	        <br/>
-			<%= h.label "Address" %> : <%= simple_format(house.address) %>
-			<%= h.label "House for" %> : <%= house.property_for.capitalize %>
-			<br/>
-			<%= h.label "Furniture type" %> : <%= house.furniture.capitalize %>
-			<br/>
-			<%= h.label "Number of bedrooms" %> : <%= house.bhk.upcase %>
-			<br/>
-			<%= h.label "Amount" %> : <%= house.amount %>
-			<br/>
-			<%= h.label "Age of building" %> : <%= house.age_of_property %> years
-			<br/>
-			<%= h.label "Owner" %> : <%= house.user.name.capitalize %>
-			<div class="actions">
-				<%= link_to "Edit House details", edit_house_path(house), class: "btn btn-xs btn-primary" %>
-	    		<%= link_to "Delete House", house_path(house), method: :delete, data: {confirm: "are you sure you want to delete #{house.name} house?"},
-	    		                                               class: "btn btn-xs btn-danger" %>
-	   			<%= link_to "Back to listed houses", houses_path, class: "btn btn-xs btn-default" %>
-			</div>
-		</div>
-	</div>
+<div align="center">
+	<%= will_paginate %>
 </div>
-<% end -%>
-<% end %>
+<%= render 'house', obj: @houses %>
+<div align="center">
+	<%= will_paginate %>
+</div>

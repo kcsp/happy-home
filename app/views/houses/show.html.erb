@@ -17,9 +17,17 @@
 	<br/>
 	<%= house.label "Owner" %> : <%= @house.user.name.capitalize %>
 	<div class="actions">
-		<%= link_to "Edit House details", edit_house_path(@house), class: "btn btn-xs btn-primary" %>
-	    <%= link_to "Delete House", house_path(@house), method: :delete, data: {confirm: "are you sure you want to delete #{@house.name} house?"}, class: "btn btn-xs btn-danger" %>
-	    <%= link_to "Back to listed houses", houses_path, class: "btn btn-xs btn-default" %>
+
+		<% if logged_in? && (current_user.user_type == 'Tenant' || current_user.user_type == 'Admin') %>
+			<a href="#" class="btn btn-xs btn-success"> Book House </a>
+	    <% end %>
+
+		<% if logged_in? && (current_user == @house.user || current_user.user_type == 'Admin') %>
+			<%= link_to "Edit House details", edit_house_path(@house), class: "btn btn-xs btn-primary" %>
+	   		<%= link_to "Delete House", house_path(@house), method: :delete, data: {confirm: "are you sure you want to delete #{@house.name} house?"},													class: "	btn btn-xs btn-danger" %>
+	    <% end %>
+   		<%= link_to "Back to listed houses", houses_path, class: "btn btn-xs btn-default" %>
+   		
 	</div>
 	<% end %>
 </div>

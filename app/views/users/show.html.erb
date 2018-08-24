@@ -1,20 +1,40 @@
 <h1 class="center"> <%= @user.name %>'s profile </h1>
+<%= form_for @user do |user| %>
 <div class="well col-xs-8 col-xs-offset-2">
-	<%= form_for @user do |user| %>
 	<h3 class="description"><%= @user.name %> account details : </h3>
-	<%= user.label "Name" %> : <%= @user.name.capitalize %>
-	<br/>
-	<%= user.label "Mail-Id" %> : <%= @user.mail %>
-	<br/>
-	<%= user.label "Contact" %> : <%= @user.contact %>
-	<br/>
-	<%= user.label "User type" %> : <%= @user.user_type.capitalize %>
-	<div class="actions">
-		<%= link_to "Update account details", edit_user_path(@user), class: "btn btn-xs btn-primary" %>
-	    <%= link_to "Delete account", user_path(@user), method: :delete, 
-	                                                      data: {confirm: "are you sure you want to delete #{@user.name} account permanently?"},
-	                                                      class: "btn btn-xs btn-danger" %>
-	    <%= link_to "Back to users page", users_path, class: "btn btn-xs btn-default" %>
+    <div class="col-sm-4">
+    	<div class="dp">
+	    	<%= gravatar_for @user %>
+		</div>
+    </div>
+    <div class="col-sm-5">
+		<%= user.label "Name" %> : <%= @user.name.capitalize %>
+		<br/>
+		<%= user.label "Mail-Id" %> : <%= @user.mail %>
+		<br/>
+		<%= user.label "Contact" %> : <%= @user.contact %>
+		<br/>
+		<%= user.label "User type" %> : <%= @user.user_type.capitalize %>
 	</div>
-	<% end %>
+		<div class="col-xs-8">
+			<div class="actions">
+				<%= link_to "Update account details", edit_user_path(@user), class: "btn btn-xs btn-primary" %>
+	    		<%= link_to "Delete account", user_path(@user), method: :delete, 
+	            	                                            data: {confirm: "are you sure you want to delete #{@user.name} account permanently?"},
+	                  		                                    class: "btn btn-xs btn-danger" %>
+	            <% if logged_in? && current_user.user_type == 'Admin' %>
+	    		<%= link_to "Back to users page", users_path, class: "btn btn-xs btn-default" %>
+	    		<% end %>
+			</div>
+		</div>
 </div>
+
+<% end %>
+<div class="center">
+	<%= will_paginate @user_houses %>
+</div>
+	<%= render 'houses/house', obj: @user_houses %>
+<div class="center">
+	<%= will_paginate @user_houses %>
+</div>
+	

@@ -21,6 +21,9 @@
 		            </div>
 		        </div>
 		        <div class="form-group">
+		            <%= user.password_field :password, class: "form-control", placeholder: "Enter your password" %>
+		        </div>
+		        <div class="form-group">
 		        	<p> <input type="checkbox" required> Agree to terms and conditions </p>
 		        </div>
 		    </div>
@@ -28,7 +31,7 @@
 		    </div>
 		    <div class="form-group">
 		    	<div class="col-sm-offset-5 col-sm-1">
-		    		<%= user.submit "Sign up", class: "btn btn-success"%>
+		    		<%= user.submit "Sign up", class: "btn btn-success" %>
 		   		</div>
 		    </div>
 		<% end %>

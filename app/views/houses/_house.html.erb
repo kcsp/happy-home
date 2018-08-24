@@ -1,0 +1,39 @@
+<% obj.each do |house| %>
+<%= form_for house do |h| %>
+<div class="row">
+	<div class="col-xs-8 col-xs-offset-2">
+		<div class="well well-lg">
+			<h3 class="description"><%= house.name %> details : </h3>
+			<%= h.label "House name" %> : <%= link_to house.name.capitalize, house_path(house) %>
+	        <br/>
+			<%= h.label "Address" %> : <%= simple_format(house.address) %>
+			<%= h.label "House for" %> : <%= house.property_for.capitalize %>
+			<br/>
+			<%= h.label "Furniture type" %> : <%= house.furniture.capitalize %>
+			<br/>
+			<%= h.label "Number of bedrooms" %> : <%= house.bhk.upcase %>
+			<br/>
+			<%= h.label "Amount" %> : <%= house.amount %>
+			<br/>
+			<%= h.label "Age of building" %> : <%= house.age_of_property %> years
+			<br/>
+			<%= h.label "Owner" %> : <%= house.user.name.capitalize %>
+			<div class="actions">
+				
+				<% if logged_in? && (current_user.user_type == 'Tenant' || current_user.user_type == 'Admin') %>
+	    			<a href="#" class="btn btn-xs btn-success"> Book House </a>
+	    		<% end %>
+				
+				<% if logged_in? && (current_user == house.user || current_user.user_type == 'Admin') %>
+					<%= link_to "Edit House details", edit_house_path(house), class: "btn btn-xs btn-primary" %>
+	    			<%= link_to "Delete House", house_path(house), method: :delete, data: {confirm: "are you sure you want to delete #{house.name} house?"},
+	    		    	                                           class: "btn btn-xs btn-danger" %>
+
+	    	    <% end %>
+
+	    	</div>
+		</div>
+	</div>
+</div>
+<% end %>
+<% end %>

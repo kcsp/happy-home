@@ -1,10 +1,18 @@
-<h1>User's of Happy-Home</h1>
+<h1 class="center">User's of Happy-Home</h1>
+<div class="center">
+	<%= will_paginate %>
+</div>
 <% @users.each do |user|%>
 <%= form_for user do |u| %>
 <div class="row">
-	<div class="col-xs-8 col-xs-offset-2">
-		<div class="well well-lg">
-			<h3 class="description"><%= user.name %> account details : </h3>
+	<div class="well col-xs-8 col-xs-offset-2">
+		<h3 class="description"><%= user.name %> account details : </h3>
+		<div class="col-sm-4">
+			<div class="dp">
+				<%= gravatar_for user %>
+    		</div>
+		</div>
+		<div class="col-sm-5">
 			<%= u.label "Name" %> : <%= link_to user.name.capitalize, user_path(user) %>
 			<br/>
 			<%= u.label "Mail-Id" %> : <%= user.mail %>
@@ -12,15 +20,20 @@
 			<%= u.label "Contact" %> : <%= user.contact %>
 			<br/>
 			<%= u.label "User type" %> : <%= user.user_type.capitalize %>
+		</div>
+		<div class="col-xs-8">
 			<div class="actions">
 				<%= link_to "Update account details", edit_user_path(user), class: "btn btn-xs btn-primary" %>
-	    		<%= link_to "Delete account", user_path(user), method: :delete,
-	    			                                            data: {confirm: "are you sure you want to delete #{user.name} account permanently?"},
-	        	                                                class: "btn btn-xs btn-danger" %>
-	   			<%= link_to "Back to users page", users_path, class: "btn btn-xs btn-default" %>
-	  		</div>
-	  	</div>
-	  </div>
-	</div>
+   				<%= link_to "Delete account", user_path(user), method: :delete,
+   			    	                                           data: {confirm: "are you sure you want to delete #{user.name} account permanently?"},
+       	               		                                   class: "btn btn-xs btn-danger" %>
+				<%= link_to "Back to users page", users_path, class: "btn btn-xs btn-default" %>
+			</div>
+		</div>
+	 </div>
+</div>
 <% end %>
 <% end %>
+<div class="center">
+	<%= will_paginate %>
+</div>

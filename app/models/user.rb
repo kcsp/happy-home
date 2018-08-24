@@ -9,8 +9,11 @@ class User < ApplicationRecord
 	validates :contact, presence:true, uniqueness:true, numericality:true, length: {minimum:10,maximum:10}
 	validates :user_type, presence:true
 
+	has_many :houses
 	has_many :transactions
-	has_many :houses, through: :transactions
+	has_many :transactioned_houses, through: :transactions, source: :houses
+
+	has_secure_password
 
 	def downcase_fields
 		self.mail.downcase!

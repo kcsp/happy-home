@@ -8,8 +8,17 @@ gem 'rails', '~> 5.2.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+
+# For secure password 
+gem 'bcrypt', '~> 3.1.7'
+
+# For pagination
+gem 'will_paginate', '3.1.5'
+gem 'bootstrap-will_paginate', '1.0.0' 
+
 # Use SCSS for stylesheets
 gem 'jquery-rails'
+# For bootstrap
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -62,7 +71,9 @@ group :test do
 end
 
 group :production do
+  # For postgress DB
   gem "pg"
+  
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
