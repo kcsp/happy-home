@@ -56,9 +56,14 @@ class UsersController < ApplicationController
 	end 
 
 	def validate_user
-		if current_user != @user && current_user.user_type != 'Admin' 
-			flash[:danger] = "You can view or perform action to your own account"
-			redirect_to root_path
+		if logged_in?		
+			if current_user != @user && current_user.user_type != 'Admin' 
+				flash[:danger] = "You can view or perform action to your own account"
+				redirect_to root_path
+			end
+		else
+			flash[:danger] = "Login as Admin to Access user related functionalities"
+			redirect_to login_path
 		end
 	end
 

@@ -9,7 +9,7 @@ class User < ApplicationRecord
 	validates :contact, presence:true, uniqueness:true, numericality:true, length: {minimum:10,maximum:10}
 	validates :user_type, presence:true
 
-	has_many :houses
+	has_many :houses, dependent: :destroy
 	has_many :transactions
 	has_many :transactioned_houses, through: :transactions, source: :houses
 

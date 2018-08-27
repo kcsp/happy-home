@@ -57,8 +57,13 @@ class HousesController < ApplicationController
 	end 
 
 	 def validate_user
-		if current_user != @house.user && current_user.user_type != 'Admin'
-			flash[:danger] = "You are not the owner of this house to perform operations"
+	 	if logged_in?
+			if current_user != @house.user && current_user.user_type != 'Admin'
+				flash[:danger] = "You are not the owner or Admin of this house to perform operations"
+				redirect_to root_path
+			end
+		else
+			flash[:danger] = "Login to perform this operation on houses"
 			redirect_to root_path
 		end
 	end

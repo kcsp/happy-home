@@ -52,7 +52,5 @@
 	</div>
 </div>
 <% elsif logged_in? %>
-<h1>
-	 You aren't eligble to list house, <%= link_to "Sign up", signup_path %> as Land lord, Thank you...
-</h1>
+<% flash[:danger] = "You must be logged in as Owner to perform this action" %>
 <% end %>
