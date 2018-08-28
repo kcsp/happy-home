@@ -8,6 +8,7 @@ class User < ApplicationRecord
 	before_save :downcase_fields
 	validates :contact, presence:true, uniqueness:true, numericality:true, length: {minimum:10,maximum:10}
 	validates :user_type, presence:true
+	validates :password, presence: true, length: {minimum:8, maximum: 25}
 
 	has_many :houses, dependent: :destroy
 	has_many :transactions
