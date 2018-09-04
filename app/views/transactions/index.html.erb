@@ -1,0 +1,41 @@
+<h1 class="center"> Houses you booked from Happy-Home </h1>
+<div align="center">
+	<%= will_paginate %>
+</div>
+<% @transactions.each do |transaction| %>
+	<%= form_for transaction do |t| %>
+		<div class="row">
+			<div class="col-xs-offset-2 col-xs-8 col-xs-offset-2">
+				<div class="well well-lg">
+					<h3 class="description">Booking details </h3>
+					<%= t.label "Transaction ID" %>  : (<%= transaction.id %>)
+					<br/>
+					<%= t.label "House name" %> : <%= link_to transaction.house.name.capitalize, house_path(transaction.house) %>
+	    	    	<br/>
+					<%= t.label "Address" %> : <%= simple_format(transaction.house.address) %>
+					<%= t.label "House for" %> : <%= transaction.house.property_for.capitalize %>
+					<br/>
+					<%= t.label "Furniture type" %> : <%= transaction.house.furniture.capitalize %>
+					<br/>
+					<%= t.label "Number of bedrooms" %> : <%= transaction.house.bhk.upcase %>
+					<br/>
+					<%= t.label "Amount" %> : <%= transaction.house.amount %>
+					<br/>
+					<%= t.label "Age of building" %> : <%= transaction.house.age_of_property %> years
+					<br/>
+					<%= t.label "Owner" %> : <%= transaction.house.user.name.capitalize %>
+					<br/>
+					<%= t.label "Tenant" %> : <%= transaction.user.name.capitalize %>
+					<div class="actions">
+				
+					<% if logged_in? && current_user.user_type == 'Admin' %>
+	    				<%= link_to "Edit transaction details", edit_transaction_path(transaction), class: "btn btn-xs btn-success" %>
+	    			<% end %>
+		    	</div>
+			</div>
+		</div>
+	<% end %>
+<% end %>
+<div align="center">
+	<%= will_paginate %>
+</div>

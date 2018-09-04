@@ -20,15 +20,28 @@
 			<%= h.label "Owner" %> : <%= house.user.name.capitalize %>
 			<div class="actions">
 				
-				<% if logged_in? && (current_user.user_type == 'Tenant' || current_user.user_type == 'Admin') %>
-	    			<a href="#" class="btn btn-xs btn-success"> Book House </a>
-	    		<% end %>
+				<% validate_house_availability = true %>
+				<% Transaction.where(house: house).each do |transaction|  %>
+					<% if transaction.house == house %> 
+						<% validate_house_availability = false %>
+					<% end %> 
+				<% end %>
+				
+				<% if logged_in? %>	
+					<% if validate_house_availability && house.user != current_user %>
+	    				<%= link_to "Book house", book_path(house), method: :post, class: "btn btn-xs btn-success" %>
+	    			<% elsif !validate_house_availability || house.user != current_user %>
+						<%= link_to "See transaction details", transactions_path, class: "btn btn-xs btn-primary" %>
+					<% end %>
+				<% end %>
 				
 				<% if logged_in? && (current_user == house.user || current_user.user_type == 'Admin') %>
 					<%= link_to "Edit House details", edit_house_path(house), class: "btn btn-xs btn-primary" %>
-	    			<%= link_to "Delete House", house_path(house), method: :delete, data: {confirm: "are you sure you want to delete #{house.name} house?"},
-	    		    	                                           class: "btn btn-xs btn-danger" %>
-
+					<% if validate_house_availability %>
+	    				<%= link_to "Delete House", house_path(house), method: :delete, 
+	    											data: {confirm: "are you sure you want to delete #{house.name} house?"},
+	    		    	                            class: "btn btn-xs btn-danger" %>
+	    		    <% end %>
 	    	    <% end %>
 
 	    	</div>

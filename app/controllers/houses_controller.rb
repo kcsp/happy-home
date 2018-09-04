@@ -7,7 +7,16 @@ class HousesController < ApplicationController
 	before_action :validate_user, only: [:edit, :update, :destroy]
 	
 	def index
-		@houses = House.paginate(page: params[:page], per_page: 1)
+		#@houses = House.paginate(page: params[:page], per_page: 1)
+		if params[:list_type] == 'me'
+			@houses = House.where(user: current_user).paginate(page: params[:page], per_page: 1)
+		elsif params[:house_for] == 'rent'
+			@houses = House.where(property_for: 'Rent').paginate(page: params[:page], per_page: 1)
+		elsif params[:house_for] == 'sell'
+			@houses = House.where(property_for: 'Sell').paginate(page: params[:page], per_page: 1)
+		else
+			@houses = House.paginate(page: params[:page], per_page:1)							
+		end
 	end
 
 	def new 
@@ -56,7 +65,7 @@ class HousesController < ApplicationController
 		@house = House.find(params[:id])
 	end 
 
-	 def validate_user
+	def validate_user
 	 	if logged_in?
 			if current_user != @house.user && current_user.user_type != 'Admin'
 				flash[:danger] = "You are not the owner or Admin of this house to perform operations"

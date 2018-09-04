@@ -5,7 +5,13 @@ class UsersController < ApplicationController
 	before_action :validate_user, only: [:index, :show, :edit, :update, :destroy]
 	
 	def index
-		@users = User.paginate(page: params[:page], per_page: 2)
+		if params[:type] == 'owner'
+			@users = User.where(user_type: 'Land lord').paginate(page: params[:page], per_page: 1)
+		elsif params[:type] == 'tenant'
+			@users = User.where(user_type: 'Tenant').paginate(page: params[:page], per_page: 1)
+		else
+			@users = User.paginate(page: params[:page], per_page: 2)
+		end
 	end
 
 	def new 

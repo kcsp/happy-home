@@ -17,15 +17,27 @@
         
         <li><%= link_to "About us", about_path, id: "form_font" %></li>
         
-        <li><%= link_to "Listed Houses", houses_path, id: "form_font" %></li>
+        <% if logged_in? && current_user.user_type == 'Land lord' %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"  id="form_font" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listed houses
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Houses listed by you", houses_path(list_type: :me), id:"form_font" %></li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to "All listed houses", houses_path(list_type: :all), id:"form_font" %></li>
+          </ul>
+        </li>
+        <% else %>
+          <li><%= link_to "Listed Houses", houses_path, id: "form_font" %></li>
+        <% end %>
         
         <li class="dropdown">
           <a href="#" class="dropdown-toggle"  id="form_font" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">want a House?
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><%= link_to "Rent a house", houses_path, id:"form_font" %></li>
+            <li><%= link_to "Rent a house", houses_path(house_for: :rent), id:"form_font" %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to "Buy a house", houses_path, id:"form_font" %></li>
+            <li><%= link_to "Buy a house", houses_path(house_for: :sell), id:"form_font" %></li>
           </ul>
         </li>
         
@@ -42,9 +54,9 @@
           <span class="glyphicon glyphicon-user"></span> 
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><%= link_to "  Owners", users_path, id:"form_font", class: "glyphicon glyphicon-user" %></li>
+            <li><%= link_to "  Owners", users_path(type: :owner), id:"form_font", class: "glyphicon glyphicon-user" %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to "  Tenants", users_path, id:"form_font", class: "glyphicon glyphicon-user" %></li>
+            <li><%= link_to "  Tenants", users_path(type: :tenant), id:"form_font", class: "glyphicon glyphicon-user" %></li>
           </ul>
         </li>
 
@@ -55,7 +67,7 @@
        
         <% if logged_in? %>
         
-        <li><%= link_to "History", user_path(current_user), id:"form_font" %></li>
+        <li><%= link_to "History", transactions_path, id:"form_font" %></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" id="form_font" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hello 
             <span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
